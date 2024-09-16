@@ -86,7 +86,4 @@ This project is licensed under the MIT License.
 
 Contributions are welcome! Please fork the repository, make your changes, and submit a pull request.
 
-## ✍️ Author
 
-1. Himanshu Gupta - [GitHub Profile](https://github.com/himanshu181749/)
-2. Manisha Sahu - [GitHub Profile](https://github.com/mani-sahu)
