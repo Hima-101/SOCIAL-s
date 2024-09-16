@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Network - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom colors */
+        .bg-main { background-color: #BFD9D2; } /* Light Sage Green */
+        /* .bg-secondary { background-color: #E6E6E6; }  Light Gray */
+        .bg-secondary { background-color: #BFD9D2; } /* Light Sage Green */
+        .bg-light { background-color: #F9F9F9; } /* Off-White */
+        .text-accent { color: #7F8C8D; } /* Cool Gray */
+        .text-highlight { color: #B2BABB; } /* Light Gray */
+        .text-username { color: #1E90FF; } /* Blue for usernames */
+        .bg-overlay { background: rgba(0, 0, 0, 0.5); } /* Dark overlay */
+        
+        .hero-image {
+            background-image: url('/waves.jpg'); /* Adjust path if necessary */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh; /* Full viewport height */
+        }
+
+       
+        /* Navbar */
+        .navbar {
+            backdrop-filter: blur(10px);
+           background: rgba(255, 255, 255, 0.7);
+        }
+
+        .sticky-navbar {
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Post styles */
+        .post-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .post-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .post-header .username {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .post-header .post-title {
+            flex-grow: 1;
+        }
+
+        .text-username {
+            color: #1E90FF;
+            cursor: pointer;
+        }
+
+        .modal-username {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: #1E90FF;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-light text-gray-900">
+
+    <!-- Navbar -->
+    <nav class="navbar sticky-navbar bg-secondary p-4">
+        <ul class="flex justify-center items-center gap-10 text-gray-700">
+            <li><a href="/home" class="text-lg font-semibold">Home</a></li>
+            <li><a href="/profile" class="text-lg font-semibold">My Profile</a></li>
+            <li><a href="/stories" class="text-lg font-semibold">Stories</a></li>
+            <li><a href="/logout" class="text-lg font-semibold">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section with Background Image -->
+    <section class="hero-image relative flex items-center justify-center">
+        <div class="bg-overlay absolute inset-0 flex items-center justify-center">
+            <h1 class="text-5xl font-bold text-white">WELCOME TO SOCIALS</h1>
+        </div>
+    </section>
+
+    <!-- Posts Grid -->
+    <div class="container mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+        <% if (posts.length > 0) { %>
+            <% posts.forEach((post, index) => { %>
+                <div class="p-6 bg-main text-gray-800 rounded-lg shadow-lg cursor-pointer">
+                    <img src="/bg.jpg" alt="Post <%= index + 1 %> Image" class="mb-4 rounded-lg">
+                    <div class="post-content">
+                        <div class="post-header">
+                            <h2 class="text-2xl font-semibold post-title"><%= post.title %></h2>
+                            <img src="https://avatar.iran.liara.run/public" alt="User Photo">
+                            <a class="username text-username" href="/users/<%= post.username %>">@<%= post.username %></a>
+                        </div>
+                        <p><%= post.content %></p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-accent">Posted on: <%= post.date %></span>
+                            <span class="text-accent">Comments: <%= post.comments %></span>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+
+
+    <script>
+
+        // Function to redirect to user-specific page
+        function redirectToUser(username) {
+            /* window.location.href = `/user/${username}`; */
+            window.location.href = `/userposts`; 
+        }
+    
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-secondary p-4 mt-8 text-center text-gray-800">
+        All Rights Reserved &copy; 2024
+    </footer>
+
+</body>
+</html>

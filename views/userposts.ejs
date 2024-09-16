@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - @<%= posts[0].username%></title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom colors from the new palette */
+        .bg-main { background-color: #F7F6F2; } /* Soft White */
+        .bg-secondary { background-color: #BFD9D2; } 
+        .bg-tert { background-color: #8fb9ad; } 
+
+        .text-primary { color: #2E2E2E; } /* Dark Grey */
+        .text-secondary { color: #FF5A5F; } /* Coral Red */
+        .text-highlight { color: #00A699; } /* Teal */
+
+
+    </style>
+</head>
+<body class="bg-main text-gray-800 flex flex-col min-h-screen">
+    <nav class="bg-tert p-4 sticky top-0 z-10">
+        <ul class="flex justify-center items-center gap-10 text-gray-700">
+            <li>
+                <form action="/home" method="GET">
+                    <button type="submit" class="text-lg font-semibold bg-transparent border-none ">Home</button>
+                </form>
+            </li>
+            <li>
+                <form action="/profile" method="GET">
+                    <button type="submit" class="text-lg font-semibold bg-transparent border-none ">My Profile</button>
+                </form>
+            </li>
+            <li>
+                <form action="/stories" method="GET">
+                    <button type="submit" class="text-lg font-semibold bg-transparent border-none ">Stories</button>
+                </form>
+            </li>
+            <li>
+                <form action="/logout" method="GET">
+                    <button type="submit" class="text-lg font-semibold bg-transparent border-none">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    
+
+    <!-- User Info Section -->
+    <section class="bg-secondary text-white p-8">
+        <div class="container mx-auto flex flex-col md:flex-row items-center">
+            <img src="https://avatar.iran.liara.run/public" alt="User Photo" class="w-32 h-32 rounded-full mb-4 md:mb-0">
+            <div class="ml-0 md:ml-8 text-center md:text-left">
+                <!-- <h1 class="text-3xl font-bold text-blue-600">@hardcoded</h1> -->
+                <h1 class="text-3xl font-bold text-blue-600">@<%= posts[0].username%></h1>
+                <p class="text-highlight mt-2">Bio: A short description about the user, their interests, and what they typically post about.</p>
+                <p class="text-primary mt-2">Joined: January 2024</p>
+                <p class="text-primary mt-2">Total Posts: <%= posts.length%></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- User's Posts Grid -->
+    <div class="container mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 flex-grow">
+        <% if (posts.length > 0) { %>
+            <% posts.forEach((post, index) => { %>
+                <div class="p-6 bg-white text-gray-800 rounded-lg shadow-lg">
+                    <img src="/bg.jpg" alt="Post 2" class="mb-4 rounded-lg">
+                    <h2 class="text-2xl font-semibold text-primary mb-2"><%= post.title %></h2>
+                    <p class="mb-4"><%= post.content %></p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-secondary">Posted on: August 10, 2024</span>
+                        <span class="text-highlight">Comments: 8</span>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-secondary p-4 text-center text-gray-200 footer-fixed">
+        All Rights Reserved &copy; 2024
+    </footer>
+
+</body>
+</html>
